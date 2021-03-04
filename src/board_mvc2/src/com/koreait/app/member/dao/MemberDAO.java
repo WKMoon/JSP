@@ -38,4 +38,9 @@ public class MemberDAO {
 		}
 		return de_pw;
 	}
+	
+	//아이디 검사
+	public boolean checkId(String memberId) {
+		return (int)session.selectOne("Member.checkId", memberId) == 1;
+	}
 }

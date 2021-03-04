@@ -8,4 +8,9 @@
 	<insert id="join" parameterType="memberVO">
 		insert into table_member values(#{memberId}, #{memberPw},#{memberName},#{memberAge},#{memberGender},#{memberEmail},#{memberZipcode},#{memberAddress},#{memberAddressDetail},#{memberAddressEtc})
 	</insert>
+	
+	<select id="checkId" parameterType="string" resultType="_int">
+		select count(*) from table_member where memberid = #{memberId}
+	</select>
+	
 </mapper>

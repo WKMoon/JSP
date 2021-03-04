@@ -41,7 +41,16 @@ public class MemberFrontController extends HttpServlet {
 			try {
 				forward = new MemberJoinOkAction().execute(req, resp);
 			} catch (Exception e) {;}
-		}else {
+		}
+		else if(command.equals("/member/MemberCheckIdOk.me")) {
+			try {
+				forward = new MemberCheckIdOkAction().execute(req, resp);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("/app/error/404.jsp");
