@@ -10,7 +10,7 @@ import com.koreait.action.ActionForward;
 import com.koreait.app.member.dao.MemberDAO;
 import com.koreait.app.member.vo.MemberVO;
 
-//컨트롤러
+//ì»¨íŠ¸ë¡¤ëŸ¬
 public class MemberJoinOkAction implements Action{
 
 	@Override
@@ -24,6 +24,7 @@ public class MemberJoinOkAction implements Action{
 	
 		ActionForward forward = null;
 	
+		//사용자가 입력한 정보들
 	      m_vo.setMemberId(req.getParameter("memberId"));
 	      m_vo.setMemberPw(req.getParameter("memberPw"));
 	      m_vo.setMemberName(req.getParameter("memberName"));
@@ -35,18 +36,21 @@ public class MemberJoinOkAction implements Action{
 	      m_vo.setMemberAddressDetail(req.getParameter("memberAddressDetail"));
 	      m_vo.setMemberAddressEtc(req.getParameter("memberAddressEtc"));
 
+	      //DB에서 INSERT 실패시
 		if(!m_dao.join(m_vo)) {
+			//직접 HTML문서로 응답
 			PrintWriter out  = resp.getWriter();
 			resp.setContentType("text/html;charset=utf-8");
-			out.println("<script>alert('서버가 불안정합니다. 잠시 후 다시 시도해주세요')</script>");
+			out.println("<script>alert('서버가 불안정합니다. 잠시 후에 다시 시도해주세요.')</script>");
 			out.close();
 		}else {
+			//DB에서 INSERT 성공 시
 			forward = new ActionForward();
+			//이동할 페이지 정보를 담아서 리턴
 			forward.setRedirect(false);
 			forward.setPath("/member/MemberLogin.me");
-			
 		}
-		//컨트롤러에서 응답은 반드시 한번만 가능하다.
+		//ì»¨íŠ¸ë¡¤ëŸ¬ì—�ì„œ ì�‘ë‹µì�€ ë°˜ë“œì‹œ í•œë²ˆë§Œ ê°€ëŠ¥í•˜ë‹¤.
 		
 		return forward;
 	}

@@ -43,4 +43,9 @@ public class MemberDAO {
 	public boolean checkId(String memberId) {
 		return (int)session.selectOne("Member.checkId", memberId) == 1;
 	}
+	
+	//로그인
+	public boolean login(MemberVO m_vo) {
+		return (int)session.selectOne("Member.login", m_vo) == 1;
+	}
 }
