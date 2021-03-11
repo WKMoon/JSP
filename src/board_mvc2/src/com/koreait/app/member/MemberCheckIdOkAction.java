@@ -14,8 +14,9 @@ public class MemberCheckIdOkAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		
+		//전달받은 데이터 중 한글이 있다면 깨지지 않도록 방지
 		req.setCharacterEncoding("UTF-8");
+		
 		String id = req.getParameter("id");
 		MemberDAO m_dao = new MemberDAO();
 		
@@ -33,8 +34,23 @@ public class MemberCheckIdOkAction implements Action{
 			out.println("ok");
 		}
 		out.close();
-		//페이지 이동을 하지 않는다
+		
+		//페이지 이동을 하지 않는다.
 		return null;
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

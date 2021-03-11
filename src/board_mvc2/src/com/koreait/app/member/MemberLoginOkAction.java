@@ -1,7 +1,5 @@
 package com.koreait.app.member;
 
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,40 +7,33 @@ import javax.servlet.http.HttpSession;
 import com.koreait.action.Action;
 import com.koreait.action.ActionForward;
 import com.koreait.app.member.dao.MemberDAO;
-import com.koreait.app.member.vo.MemberVO;
 
-public class MemberLoginOkAction implements Action{
+public class MemberLoginOkAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		req.setCharacterEncoding("UTF-8");
 		
-		ActionForward forward = null;
-		HttpSession session = null;
+		HttpSession session = req.getSession();
+		ActionForward forward = new ActionForward();
 		
 		MemberDAO m_dao = new MemberDAO();
-		PrintWriter out = resp.getWriter();
+
+		String id = req.getParameter("memberId");
+		String pw = req.getParameter("memberPw");
 		
-		String id = req.getParameter("id");
-		String pw = req.getParameter("pw");
-		
-		MemberVO m_vo = new MemberVO();
-		m_vo.setMemberId(id);
-		m_vo.setMemberPw(m_dao.encrypt(pw));
-		
-		resp.setContentType("text/html;charset=utf-8");
-		
-		if(!m_dao.login(m_vo)) {
-			out.println("not-ok");
+		if(m_dao.login(id, pw)) {
+			//로그인 성공 시
+			session.setAttribute("session_id", id);
+			forward.setRedirect(true);
+			forward.setPath("/board/BoardList.bo");
 		}else {
-			session = req.getSession();
-			session.setAttribute("id", id);
-			
-			forward = new ActionForward();
+			//로그인 실패
+			System.out.println("로그인 실패");
 			forward.setRedirect(false);
-			forward.setPath("/member/BoardChart.me");
+			//로그인 실패 시 경고창을 출력해주기 위해서 login 파라미터를 같이 전송해준다.
+			forward.setPath("/member/MemberLogin.me?login=false");
 		}
-		out.close();
 		return forward;
 	}
 

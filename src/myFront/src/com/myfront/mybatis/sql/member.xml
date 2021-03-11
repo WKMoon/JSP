@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Member">
+	<select id="checkId" parameterType="string" resultType="_int">
+		select count(*) from front_table where memberid = #{id}
+	</select>
+	<insert id="join" parameterType="member">
+		insert into front_table values (#{memberId}, #{memberPw}, #{memberName}, #{memberGender}, #{memberEmail}, #{memberAddress}, #{memberPhone})
+	</insert>
+	<select id="login" parameterType="member" resultType="_int">
+		select count(*) from front_table where memberid = #{memberId} and memberpw = #{memberPw}
+	</select>
+	<select id="findId" parameterType="member" resultType="member">
+		select memberid from front_table where membername = #{memberName} and memberemail = #{memberEmail}
+	</select>
+	<select id="findPw" parameterType="member" resultType="string">
+		select memberpw from front_table where memberid = #{memberId} and memberemail = #{memberEmail}
+	</select>
+</mapper>
+
+
