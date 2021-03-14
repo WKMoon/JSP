@@ -65,7 +65,3 @@ public class MemberJoinOkAction implements Action{
 		return forward;
 	}
 }
-
-
-
-

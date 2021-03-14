@@ -70,10 +70,13 @@ public class MemberFrontController extends HttpServlet {
 			try {
 				forward = new MemberLoginOkAction().execute(req, resp);
 			} catch (Exception e) {;}
-			
 		}else if(command.equals("/member/MemberCheckIdOk.me")) {
 			try {
 				forward = new MemberCheckIdOkAction().execute(req, resp);
+			} catch (Exception e) {;}
+		}else if(command.equals("/member/MemberLogout.me")) {
+			try {
+				forward = new MemberLogoutAction().execute(req, resp);
 			} catch (Exception e) {;}
 		}else {
 			//만약 위의 모든 분기에 들어가지 않았다면, 요청한 URI가 잘못된 것이다.
