@@ -36,11 +36,81 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			break;
+		case "/board/BoardWriteOk.bo":
+			try {
+				forward = new BoardWriteOkAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/board/BoardView.bo":
+			try {
+				forward = new BoardViewAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/board/BoardModify.bo":
+			try {
+				forward = new BoardModifyAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/board/BoardModifyOk.bo":
+			try {
+				forward = new BoardModifyOkAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/board/FileDownload.bo":
+			try {
+				forward = new FileDownloadAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/board/BoardDeleteOk.bo":
+			try {
+				forward = new BoardDeleteOkAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
 		case "/board/BoardWrite.bo":
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			req.setAttribute("page", req.getParameter("page"));
 			forward.setPath("/app/board/boardWrite.jsp");
+			break;
+		case "/board/BoardReplyOk.bo":
+			try {
+				forward = new BoardReplyOkAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/board/BoardReplyList.bo":
+			try {
+				forward = new BoardReplyListAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/board/BoardReplyDeleteOk.bo":
+			try {
+				forward = new BoardReplyDeleteOkAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/board/BoardReplyModifyOk.bo":
+			try {
+				forward = new BoardReplyModifyOkAction().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			break;
 		default:
 			forward = new ActionForward();

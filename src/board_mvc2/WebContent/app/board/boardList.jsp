@@ -7,9 +7,9 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <title>MVC 게시판</title>
    </head>
-   <body> 
+   <body>
       <c:if test="${session_id eq null}">
-         <script> 
+         <script>
             alert("로그인 후 이용해주세요");
             location.replace("${pageContext.request.contextPath}/member/MemberLogin.me");
          </script>
@@ -69,7 +69,9 @@
 	               		</td>
 	               		<td style="font-family:Tahoma; font-size:10pt;">
 	               			<div align="left">
-	               				<a href="">${b_bean.getBoardTitle()}</a>
+	               				<a href="${pageContext.request.contextPath}/board/BoardView.bo?boardNum=${b_bean.getBoardNum()}&page=${nowPage}">
+	               					${b_bean.getBoardTitle()}
+	               				</a>
 	               			</div>
 	               		</td>
 	               		<td>
@@ -122,7 +124,7 @@
          </table>
          <table border="0" cellpadding="0" cellspacing="0" width="900px">
             <tr align="right" valign="middle">
-               <td><a href="${pageContext.request.contextPath}/board/BoardWrite.bo? =${nowPage}">[글쓰기]</a></td>
+               <td><a href="${pageContext.request.contextPath}/board/BoardWrite.bo?page=${nowPage}">[글쓰기]</a></td>
             </tr>
          </table>
       </center>

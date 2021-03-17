@@ -1,4 +1,4 @@
- package com.koreait.app.board;
+package com.koreait.app.board;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,6 +43,7 @@ public class BoardListOkAction implements Action{
 		
 		endPage = endPage > realEndPage ? realEndPage : endPage;
 		
+		//requestScope
 		req.setAttribute("totalCnt", totalCnt);
 		req.setAttribute("startPage", startPage);
 		req.setAttribute("endPage", endPage);
@@ -50,6 +51,8 @@ public class BoardListOkAction implements Action{
 		req.setAttribute("realEndPage", realEndPage);
 		req.setAttribute("boardList", b_dao.getBoardList(startRow, endRow));
 		
+		//forward를 사용해야 할 때 : req객체에 데이터를 담아서 전달해야 할 때
+		//redirect를 사용해야 할 때 : 전달할 req 데이터가 없고 값을 초기화 하고 싶을 때
 		forward.setRedirect(false);
 		forward.setPath("/app/board/boardList.jsp");
 		
