@@ -17,7 +17,7 @@ import com.myfront.action.Action;
 import com.myfront.action.ActionForward;
 
 public class MemberIdentificationOkAction implements Action{
-
+	//네이버 메일 인증번호를 이용한 본인 인증
 	@Override
 	public ActionForward execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		String email = req.getParameter("identiEmail");

@@ -16,6 +16,7 @@ function joinSubmit(){
 		form.id.focus();
 		return false;
 	}
+	//가입약관 동의 요구
 	if ($('#agree').not(':checked').length) {
 	    alert("가입 약관에 동의해주세요.");
 	    return false;

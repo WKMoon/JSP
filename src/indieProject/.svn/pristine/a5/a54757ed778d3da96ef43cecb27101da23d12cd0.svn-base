@@ -1,0 +1,145 @@
+package com.indieProject.app.member;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.indieProject.action.ActionForward;
+import com.indieProject.app.member.MemberLoginOkAction;
+
+public class MemberFrontController extends HttpServlet{
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doProcess(req, resp);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doProcess(req, resp);
+	}
+	
+	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		
+		String requestURI = req.getRequestURI();
+		String contextPath = req.getContextPath();
+		
+		String command = requestURI.substring(contextPath.length());
+		
+		ActionForward forward = null;
+		System.out.println(command);
+		if(command.equals("/Home.me")) {
+			System.out.println("홈");
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("index.jsp");
+			System.out.println("홈2");
+
+		} else if(command.equals("/member/MemberCheckIdOk.me")) {
+			try {
+				forward = new MemberCheckIdOkAction().execute(req, resp);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(command.equals("/member/MemberJoinOkAction.me")) {
+			//회원가입
+				try {
+					forward=new MemberJoinOkAction().execute(req, resp);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}else if(command.equals("/member/SignUp.me")) {
+					//회원가입 버튼 클릭 
+					forward =new ActionForward();
+					forward.setRedirect(false);
+					forward.setPath("/app/member/signupEnd.jsp");
+				
+		}else if(command.equals("/member/MemberFindIdAction.me")) {
+			try {
+				forward = new MemberFindIdAction().execute(req, resp);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if(command.equals("/member/MemberFindPwAction.me")) {
+			try {
+				forward = new MemberFindPwAction().execute(req, resp);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(command.equals("/member/MemberEmailCheckOkAction.me")) {
+			//이메일 인증 
+			try {
+				forward=new MemberEamilCheckOkAction().execute(req,resp);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+					
+		}else if(command.equals("/member/Login.me")) {
+			//전달받은 login 값을 가져온다.
+//			String login = req.getParameter("login");
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("/app/member/login.jsp");
+			
+		}else if(command.equals("/member/MemberLoginOk.me")) {
+			try {
+				forward = new MemberLoginOkAction().execute(req, resp);
+			} catch (Exception e) {;}
+		}else if(command.equals("/member/memberMyPage.me")) {
+			try {
+				forward = new MemberMyPageAction().execute(req, resp);
+			} catch (Exception e) {;}
+		}else if(command.equals("/member/memberChnageInfo.me")) {
+			try {
+				forward = new MemberChangeInfoAction().execute(req, resp);
+			} catch (Exception e) {;}
+		}else if(command.equals("/member/memberMyPopcorn.me")) {
+			try {
+				forward = new MemberMyPopcornAction().execute(req, resp);
+			} catch (Exception e) {;}
+		}else if(command.equals("/member/memberMyMovie.me")) {
+			try {
+				forward = new MemberCheckMyMovieAction().execute(req, resp);
+			} catch (Exception e) {;}
+		}else if(command.equals("/member/memberMyReview.me")) {
+			try {
+				forward = new MemberCheckMyReviewAction().execute(req, resp);
+			} catch (Exception e) {;}
+		}else if(command.equals("/member/memberMyBoard.me")) {
+			try {
+				forward = new MemberCheckMyBoardAction().execute(req, resp);
+			} catch (Exception e) {;}
+		}else if(command.equals("/member/memberMyReply.me")) {
+			try {
+				forward = new MemberCheckMyReplyAction().execute(req, resp);
+			} catch (Exception e) {;}
+		}
+		else if(command.equals("/member/MemberLogOutAction.me")) {
+			try {
+				forward = new MemberLogoutAction().execute(req, resp);
+			} catch (Exception e) {;}
+		}
+
+		if(forward != null) {
+			if(forward.isRedirect()) {
+
+				resp.sendRedirect(forward.getPath());
+			}else {
+				RequestDispatcher dispatcher = req.getRequestDispatcher(forward.getPath());
+				dispatcher.forward(req, resp);
+			}
+		}
+		
+	}
+}

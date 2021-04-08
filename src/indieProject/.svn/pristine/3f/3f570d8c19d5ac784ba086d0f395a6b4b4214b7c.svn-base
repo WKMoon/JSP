@@ -1,0 +1,38 @@
+/**
+ * 
+ */
+
+function sendEmail(){
+	$("#sendEmail").hide()
+	$("#checkEmail").show()
+}
+
+function checkPw(){
+	pw = $("input[name='checkPw']").val();
+	if(pw == ""){
+		alert("비밀번호를 입력해주세요.");
+	}else{
+		$.ajax({
+			url : contextPath + "/member/MemberCheckPwOk.me",
+			type : "post",
+			data : {"memberPw" : pw},
+			dataType : "text",
+			success : function(result){
+				if(result.trim() == "no"){
+					alert("비밀번호가 일치하지 않습니다.")
+				}else{
+					var memberData = JSON.parse(result);
+					$("input[name='memberId']").val(memberData.memberPw);
+					$("input[name='memberEmail']").val(memberData.memberEmail);
+					$("#step1").hide();
+					$("#step2").show();
+				}
+			},
+			error:function(){//통신 오류 시
+				console.log("오류");
+			}
+
+		})
+	}
+	
+}

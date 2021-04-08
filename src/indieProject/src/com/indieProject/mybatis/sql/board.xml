@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Board">
+<select id="getBoard" parameterType="_int" resultType="boardVO">
+	SELECT * FROM BOARD_TABLE WHERE BOARDNUM = #{boardNum}
+</select>
+<select id="getBoardImages" parameterType="_int" resultType="boardImageVO">
+	SELECT * FROM BOARDIMAGES_TABLE WHERE BOARDNUM = #{boardNum}
+</select>
+<select id="getBoardReplies" parameterType="_int" resultType="boardReplyVO">
+	SELECT * FROM BOARDREPLY_TABLE WHERE BOARDNUM = #{boardNum}
+</select>
+<insert id="insertBoard" parameterType="boardVO">
+	INSERT INTO BOARD_TABLE VALUES(FREEBOARD_SEQ.NEXTVAL, #{memberId}, #{boardContent}, 0, SYSDATE, #{boardImage})
+</insert>
+<insert id="insertBoardImages" parameterType="boardImageVO">
+	INSERT INTO BOARDIMAGES_TABLE VALUES (#{boardNum}, #{imageName})
+</insert>
+<select id="getBoardNum" resultType="_int">
+	SELECT FREEBOARD_SEQ.CURRVAL FROM DUAL
+</select>
+</mapper>

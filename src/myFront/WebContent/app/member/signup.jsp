@@ -84,7 +84,6 @@
 												<!-- <div class="col-6 col-12-small"> -->
 												<!-- </div> -->
 											
-												<
 												<div class="col-6 col-12-small">
 													<input type="button" onclick="transferEmail()" value="본인인증" style="width:30%; margin-right:4%;"/>
 												

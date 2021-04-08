@@ -27,13 +27,11 @@ public class MemberJoinOkAction implements Action{
 		m_vo.setMemberEmail(req.getParameter("email"));
 		m_vo.setMemberPhone(req.getParameter("pn"));
 		m_vo.setMemberGender(req.getParameter("gender"));
-		System.out.println("왜 안들어와");
 
 		if(m_dao.join(m_vo)) {
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("/member/MemberLogin.me");
-			System.out.println("성공함");
 		}else {
 			PrintWriter out = resp.getWriter();
 			resp.setContentType("text/html;charset=utf-8");

@@ -31,17 +31,19 @@ public class MemberLoginOkAction implements Action{
 	      m_vo.setMemberPw(m_dao.encrypt(pw));
 	      
 	      if(!m_dao.login(m_vo)) {
-//	         out.println("not");
+	    	  //로그인 실패시 로그인 창으로 다시 되돌아감
 		      forward=new ActionForward();
 
 	         forward.setRedirect(false);
 	         forward.setPath("/member/MemberLogin.me?login=false");
 	      }else {
-
+	    	  //로그인 성공시 alert
+	    	 PrintWriter out = resp.getWriter();
 	         session.setAttribute("id", id);
-	         forward=new ActionForward();
-	         forward.setRedirect(true);
-	         forward.setPath("/board/BoardList.bo");
+	         out.println("<script>alert('로그인 성공');</script>");
+//	         forward=new ActionForward();
+//	         forward.setRedirect(true);
+//	         forward.setPath("/board/BoardList.bo");
 	      }
 //	         out.close();
 
