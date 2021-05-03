@@ -16,6 +16,12 @@
 		<typeAlias type="com.indieProject.app.amamovie.vo.AmaMovieReviewVO" alias="amaMovieReviewVO"/>
 		<typeAlias type="com.indieProject.app.amamovie.vo.AmaMovieStillCutVO" alias="amaMovieStillCutVO"/>
 		<typeAlias type="com.indieProject.app.amamovie.vo.AmaMovieVO" alias="amaMovieVO"/>
+		<typeAlias type="com.indieProject.app.amamovie.vo.PopcornVO" alias="popcornVO"/>
+		<typeAlias type="com.indieProject.app.amamovie.vo.AmaMovieAndPosterVO" alias="amaMovieAndPosterVO"/>
+		<typeAlias type="com.indieProject.app.member.vo.MemberAccountVO" alias="memberAccountVO"/>
+		<typeAlias type="com.indieProject.app.member.vo.PopcornExchangeVO" alias="popcornExchangeVO"/>
+		<typeAlias type="com.indieProject.app.manager.vo.PopcornExchangeDataVO" alias="popcornExchangeDataVO"/>
+		<typeAlias type="com.indieProject.app.member.vo.DeleteMovieVO" alias="deleteMovieVO"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -23,7 +29,7 @@
 			<transactionManager type="JDBC"/>
 			<dataSource type="POOLED">
 				<property name="driver" value="oracle.jdbc.OracleDriver"/>
-				<property name="url" value="jdbc:oracle:thin:@localhost:1521/XE"/>
+				<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521/XE"/>
 				<property name="username" value="hr"/>
 				<property name="password" value="hr"/>
 			</dataSource>
@@ -34,6 +40,7 @@
 		<mapper resource="com/indieProject/mybatis/sql/member.xml"/>
 		<mapper resource="com/indieProject/mybatis/sql/board.xml"/>
 		<mapper resource="com/indieProject/mybatis/sql/amamovie.xml"/>
+		<mapper resource="com/indieProject/mybatis/sql/manager.xml"/>
 	</mappers>
 	
 </configuration>
